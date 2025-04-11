@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Johnson Family - Stay Connected</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #f8b195;
+            --accent-color: #86b3d1;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-heading: 'Georgia', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f6a080;
+            color: var(--text-color);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        /* Family Members Section */
+        .family-members {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .member-card:hover .member-image img {
+            transform: scale(1.05);
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-info h3 {
+            margin-bottom: 5px;
+        }
+
+        .member-info .relation {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 80px 0;
+        }
+
+        .events-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-date {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .event-info {
+            padding: 20px;
+        }
+
+        .event-info h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Family Updates */
+        .updates {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .update-form {
+            background-color: var(--light-bg);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-main);
+        }
+
+        .updates-feed {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .update-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .update-item:last-child {
+            border-bottom: none;
+        }
+
+        .update-author {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .update-date {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        /* Family Tree */
+        .family-tree {
+            padding: 80px 0;
+        }
+
+        .tree-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tree ul {
+            display: flex;
+            padding-top: 20px;
+            position: relative;
+            transition: all 0.5s;
+            list-style-type: none;
+        }
+
+        .tree li {
+            float: left;
+            text-align: center;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: all 0.5s;
+        }
+
+        .tree li::before,
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 1px solid #ccc;
+        }
+
+        .tree li:only-child::after,
+        .tree li:only-child::before {
+            display: none;
+        }
+
+        .tree li:only-child {
+            padding-top: 0;
+        }
+
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        .tree li:last-child::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 5px 0 0;
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+        }
+
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+        }
+
+        .tree-person {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: white;
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                height: calc(100vh - 80px);
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="/api/placeholder/50/50" alt="Family Logo">
+                    <h1>Family</h1>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#members">Family Members</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#tree">Family Tree</a></li>
+                    <li><a href="#updates">Updates</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu" id="mobileMenu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Welcome to Our Family</h2>
+                <p>Celebrating our connections, preserving our memories, and sharing our journey together.</p>
+                <div>
+                    <a href="#members" class="btn">Meet The Family</a>
+                    <a href="#updates" class="btn btn-secondary">Latest Updates</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="Family">
+                </div>
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>\\\\\\\\</p>
+                    <p>\\\\\\\\\</p>
+                    <p>\\\\\\\\\\</p>
+                    <a href="#tree" class="btn">View Our Family Tree</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Members Section -->
+    <section class="family-members" id="members">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Family</h2>
+                <p>Get to know the wonderful people who make up the family.</p>
+            </div>
+            <div class="members-grid">
+                <!-- Family Member 1 -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="/api/placeholder/300/300" alt="Ilesov Nurzhan">
+                    </div>
+                    <div class="member-info">
+                        <h3>Ilesov Nurzhan</h3>
+                        <span class="relation">Father</span>
+                        <p>Nurzhan loves working with his wife in his store.</p>
+                    </div>
+                </div>
+                
+                <!-- Family Member 2 -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="/api/placeholder/300/300" alt="Pulatova Zamira">
+                    </div>
+                    <div class="member-info">
+                        <h3>Pulatova Zamira</h3>
+                        <span class="relation">Mother</span>
+                        <p>Zamira is known for her incredible cooking, especially her famous apple pie that everyone fights over at reunions.</p>
+                    </div>
+                </div>
+                
+                <!-- Family Member 3 -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="/api/placeholder/300/300" alt="James Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Gulbanu Ilesova</h3>
+                        <span class="relation">Daughter</span>
+                        <p>Gulbanu .</p>
+                    </div>
+                </div>
+                
+                <!-- Family Member 4 -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="/api/placeholder/300/300" alt="Sarah Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Sarah Johnson</h3>
+                        <span class="relation">Mother</span>
+                        <p>A talented artist and teacher, Sarah is the creative force behind many family traditions.</p>
+                    </div>
+                </div>
+                
+                <!-- Family Member 5 -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="/api/placeholder/300/300" alt="Michael Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Michael Johnson</h3>
+                        <span class="relation">Son</span>
+                        <p>Michael is studying computer science and loves playing basketball in his free time.</p>
+                    </div>
+                </div>
+                
+                <!-- Family Member 6 -->
+                <div class="member-card">
+                    <div class="member-image">
+                        <img src="/api/placeholder/300/300" alt="Emily Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Emily Johnson</h3>
+                        <span class="relation">Daughter</span>
+                        <p>The family musician, Emily plays three instruments and dreams of becoming a composer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Events Section -->
+    <section class="events" id="events">
+        <div class="container">
+            <div class="section-title">
+                <h2>Upcoming Family Events</h2>
+                <p>Mark your calendars for these important family gatherings.</p>
+            </div>
+            <div class="events-list">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        July 15-17, 2025
+                    </div>
+                    <div class="event-info">
+                        <h3>Annual Family Reunion</h3>
+                        <p>Location: Lake Meadow Park</p>
+                        <p>Our biggest gathering of the year with outdoor activities, barbecue, and catching up with relatives from across the country.</p>
+                        <a href="#" class="btn">Details & RSVP</a>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        August 23, 2025
+                    </div>
+                    <div class="event-info">
+                        <h3>Grandpa Robert's 80th Birthday</h3>
+                        <p>Location: Johnson Residence</p>
+                        <p>A special celebration for our beloved grandfather. Surprise party planning is underway!</p>
+                        <a href="#" class="btn">Details & RSVP</a>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        November 26-27, 2025
+                    </div>
+                    <div class="event-info">
+                        <h3>Thanksgiving Gathering</h3>
+                        <p>Location: James & Sarah's Home</p>
+                        <p>Our traditional Thanksgiving celebration with Margaret's famous pies and family games.</p>
+                        <a href="#" class="btn">Details & RSVP</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Family Photo Gallery</h2>
+                <p>Cherishing our moments together through the years.</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Family Vacation 2024">
+                    <div class="gallery-caption">Summer Vacation 2024</div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Christmas 2023">
+                    <div class="gallery-caption">Christmas Celebration 2023</div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Emily's Graduation">
+                    <div class="gallery-caption">Emily's High School Graduation</div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Family Reunion">
+                    <div class="gallery-caption">Family Reunion 2023</div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Grandparents Anniversary">
+                    <div class="gallery-caption">Grandparents' 50th Anniversary</div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Thanksgiving Dinner">
+                    <div class="gallery-caption">Thanksgiving Dinner 2023</div>
+                </div>
+                
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Michael's Basketball Game">
+                    <div class="gallery-caption">Michael's Championship Game</div>
+                </div>
+                
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item">
+                    <img src="/api/placeholder/300/300" alt="Family Camping Trip">
+                    <div class="gallery-caption">Camping Trip 2024</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#" class="btn">View All Photos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Tree Section -->
+    <section class="family-tree" id="tree">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Family Tree</h2>
+                <p>Exploring our roots and connections through generations.</p>
+            </div>
+            <div class="tree-container">
+                <div class="tree">
+                    <ul>
+                        <li>
+                            <div class="tree-person">Robert & Margaret Johnson</div>
+                            <ul>
+                                <li>
+                                    <div class="tree-person">James & Sarah Johnson</div>
+                                    <ul>
+                                        <li>
+                                            <div class="tree-person">Michael Johnson</div>
+                                        </li>
+                                        <li>
+                                            <div class="tree-person">Emily Johnson</div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="tree-person">Thomas & Lisa Johnson</div>
+                                    <ul>
+                                        <li>
+                                            <div class="tree-person">Jessica Johnson</div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="tree-person">Elizabeth & Mark Davis</div>
+                                    <ul>
+                                        <li>
+                                            <div class="tree-person">Ryan Davis</div>
+                                        </li>
+                                        <li>
+                                            <div class="tree-person">Emma Davis</div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#" class="btn">View Interactive Tree</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Updates Section -->
+    <section class="updates" id="updates">
+        <div class="container">
+            <div class="section-title">
+                <h2>Family Updates</h2>
+                <p>Stay connected with what's happening in our family members' lives.</p>
+            </div>
+            
+            <div class="update-form">
+                <h3>Share Your Update</h3>
+                <form id="updateForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="update">Your Update</label>
+                        <textarea id="update" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Post Update</button>
+                </form>
+            </div>
+            
+            <h3>Recent Updates</h3>
+            <div class="updates-feed" id="updatesFeed">
+                <!-- Update 1 -->
+                <div class="update-item">
+                    <div class="update-author">Michael Johnson</div>
+                    <div class="update-date">April 8, 2025</div>
+                    <p>Just got accepted into the summer internship program at Tech Innovations! Really excited to start in June.</p>
+                </div>
+                
+                <!-- Update 2 -->
+                <div class="update-item">
+                    <div class="update-author">Sarah Johnson</div>
+                    <div class="update-date">April 5, 2025</div>
+                    <p>My art exhibition opens next weekend at the Community Gallery. Would love to see any family members who can make it! Opening reception is Saturday from 6-8pm.</p>
+                </div>
+                
+                <!-- Update 3 -->
+                <div class="update-item">
+                    <div class="update-author">Robert Johnson</div>
+                    <div class="update-date">April 3, 2025</div>
+                    <p>Finally finished the rocking chair I've been working on for the past month. Margaret loves it! Will bring it to the reunion for everyone to see.</p>
+                </div>
+                
+                <!-- Update 4 -->
+                <div class="update-item">
+                    <div class="update-author">Emily Johnson</div>
+                    <div class="update-date">March 30, 2025</div>
+                    <p>My orchestra's spring concert is coming up on May 15th. We're playing Tchaikovsky's Symphony No. 5 and I have a small solo! Tickets are available online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get in Touch</h2>
+                <p>Have questions or suggestions for our family website? Reach out to us!</p>
+            </div>
+            <class="contact-info">
+                <!-- Contact Card 1 -->
+                <body class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p>johnsonfamily@example.com</p>
+                </body>
+            </html>
